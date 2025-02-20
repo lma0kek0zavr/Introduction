@@ -107,7 +107,7 @@ public class FirstSteps {
 
     public void cube(int[]array){
         for (int i = 0; i <= array.length - 1; i++) { 
-            array[i] = (int)Math.pow(array[i], 2);
+            array[i] = (int)Math.pow(array[i], 3);
         }
     }
 
@@ -143,67 +143,54 @@ public class FirstSteps {
     }
 
     public int sum(int[][] matrix){
-        int[] flatArray = matrixToFlatArray(matrix);
-        
-        return sum(flatArray);
+        int sum = 0;
+
+        for (int[] i : matrix) {
+            sum += sum(i);
+        }
+
+        return sum;
     }
 
     public int max(int[][] matrix){
-        int[] flatArray = matrixToFlatArray(matrix);
-
-        if (flatArray.length == 0) {
+        if (matrix.length == 0 && matrix[0].length == 0) { 
             return Integer.MIN_VALUE;
         }
 
-        return max(flatArray);
+        int max = 0;
+
+        for (int[] i : matrix) {
+            max = max(i) > max ? max(i) : max;
+        }
+
+        return max;
     }
 
     public int diagonalMax(int[][] matrix){
-        int[] flatArray = matrixToFlatArray(matrix);
-
-        if (flatArray.length == 0) {
+        if (matrix.length == 0 && matrix[0].length == 0) { 
             return Integer.MIN_VALUE;
         }
 
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        int length = Math.min(rows, cols);
+        int max = 0;
 
-        int[] subFlatArray = new int[length];
-
-        for (int i = 0; i < length; i++) { 
-            subFlatArray[i] = flatArray[i * rows + i];
+        for (int i = 0; i < matrix.length; i++) {
+            max = matrix[i][i] > max ? matrix[i][i] : max;
         }
 
-        return max(subFlatArray);
+        return max;
     }
 
     public boolean isSortedDescendant(int[][] matrix){
-        int[] flatArray = matrixToFlatArray(matrix);
-
-        if(flatArray.length == 0) {
+        if (matrix.length == 0 && matrix[0].length == 0) { 
             return true;
         }
 
-        return isSortedDescendant(flatArray);
-    }
-
-    private static int[] matrixToFlatArray(int[][] matrix) { 
-        int length = 0;
-
-        for (int[] row : matrix) { 
-            length += row.length;
+        for (int[] i : matrix) {
+            if (!isSortedDescendant(i)) {
+                return false;
+            }
         }
 
-        int[] flatArray = new int[length];
-        int index = 0;
-
-        for (int[] row : matrix) {
-            for (int elem: row) {
-                flatArray[index++] = elem;
-            }
-        }      
-
-        return flatArray;
+        return true;
     }
 }

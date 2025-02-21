@@ -153,11 +153,7 @@ public class FirstSteps {
     }
 
     public int max(int[][] matrix){
-        if (matrix.length == 0 && matrix[0].length == 0) { 
-            return Integer.MIN_VALUE;
-        }
-
-        int max = 0;
+        int max = Integer.MIN_VALUE;
 
         for (int[] i : matrix) {
             max = max(i) > max ? max(i) : max;
@@ -167,11 +163,7 @@ public class FirstSteps {
     }
 
     public int diagonalMax(int[][] matrix){
-        if (matrix.length == 0 && matrix[0].length == 0) { 
-            return Integer.MIN_VALUE;
-        }
-
-        int max = 0;
+        int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < matrix.length; i++) {
             max = matrix[i][i] > max ? matrix[i][i] : max;
@@ -181,16 +173,15 @@ public class FirstSteps {
     }
 
     public boolean isSortedDescendant(int[][] matrix){
-        if (matrix.length == 0 && matrix[0].length == 0) { 
-            return true;
-        }
+        boolean isSorted = true;
 
         for (int[] i : matrix) {
             if (!isSortedDescendant(i)) {
-                return false;
+                isSorted = false;
+                break;
             }
         }
 
-        return true;
+        return isSorted;
     }
 }

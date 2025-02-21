@@ -1,7 +1,5 @@
 package ru.ifellow.JSchool.introdution;
 
-import java.util.Arrays;
-
 public class FirstSteps {
 
     public int sum (int x, int y){
@@ -33,11 +31,11 @@ public class FirstSteps {
     }
 
     public int sum(int[] array){
-        if (array.length == 0) {
-            return 0;
-        }
-
         int sum = 0;
+
+        if (array == null) {
+            sum = 0;
+        }
 
         for (int i = 0; i <= array.length - 1; i++) { 
             sum += array[i];
@@ -47,11 +45,11 @@ public class FirstSteps {
     }
 
     public int mul(int[] array){
-        if (array.length == 0) {
-            return 0;
-        }
-
         int res = 1;
+
+        if (array == null) {
+            res = 0;
+        }
 
         for (int i = 0; i <= array.length - 1; i++) { 
             res *= array[i];
@@ -61,48 +59,58 @@ public class FirstSteps {
     }
 
     public int min(int[] array){
-        if (array.length == 0) {
-            return Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        if (array == null) {
+            return min;
         }
 
-        int[] temp = new int[array.length];
-        System.arraycopy(array, 0, temp, 0, array.length);
-        Arrays.sort(temp);
-        return temp[0];
+        for (int i = 0; i <= array.length - 1; i++) { 
+            min = min < array[i] ? min : array[i];
+        }
+
+        return min;
     }
 
     public int max(int[] array){
-        if (array.length == 0) {
-            return Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
+        
+        if (array == null) {
+            return max;
         }
 
-        int[] temp = new int[array.length];
-        System.arraycopy(array, 0, temp, 0, array.length);
-        Arrays.sort(temp);
-        return temp[temp.length - 1];
+        for (int i = 0; i <= array.length - 1; i++) { 
+            max = array[i] > max ? max : array[i];
+        }
+
+        return max;
     }
 
     public double average(int[] array){
-        if (array.length == 0) {
-            return 0;
+        int sum;
+        if (array == null) {
+            sum = 0;
         }
 
-        int sum = sum(array);
+        sum = sum(array);
         return (double)sum / array.length;
     }
 
     public boolean isSortedDescendant(int[] array){
-        if (array.length == 0) {
-            return true;
-        }
+        boolean isSorted = true;
 
+        if (array == null) { 
+            return isSorted;
+        }
+        
         for (int i = 0; i < array.length - 1; i++) { 
             if (array[i] < array[i + 1]) {
-                return false;
+                isSorted = false;
+                break;
             }
         }
 
-        return true;
+        return isSorted;
     }
 
     public void cube(int[]array){
@@ -112,12 +120,13 @@ public class FirstSteps {
     }
 
     public boolean find(int[]array, int value){
-        int[] temp = new int[array.length];
-        System.arraycopy(array, 0, temp, 0, array.length);
-        Arrays.sort(temp);
-        int index = Arrays.binarySearch(temp, value);
+        for (int i = 0; i <= array.length - 1; i++) { 
+            if (array[i] == value) {
+                return true;
+            }
+        }
 
-        return index >= 0 ? true : false;
+        return false;
     }
 
     public void reverse(int[]array){
@@ -131,7 +140,7 @@ public class FirstSteps {
     }
 
     public boolean isPalindrome(int[]array){
-        if (array.length == 0) {
+        if (array == null) {
             return false;
         }
 
@@ -139,7 +148,7 @@ public class FirstSteps {
         System.arraycopy(array, 0, temp, 0, array.length);        
         reverse(temp);
 
-        return Arrays.equals(array, temp);
+        return array == temp;
     }
 
     public int sum(int[][] matrix){
@@ -174,6 +183,10 @@ public class FirstSteps {
 
     public boolean isSortedDescendant(int[][] matrix){
         boolean isSorted = true;
+
+        if (matrix == null) { 
+            return isSorted;
+        }
 
         for (int[] i : matrix) {
             if (!isSortedDescendant(i)) {

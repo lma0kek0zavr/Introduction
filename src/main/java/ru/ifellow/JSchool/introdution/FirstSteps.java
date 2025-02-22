@@ -191,15 +191,12 @@ public class FirstSteps {
     }
 
     public boolean isSortedDescendant(int[][] matrix){
-        boolean isSorted = true;
-
         for (int[] i : matrix) {
             if (!isSortedDescendant(i)) {
-                isSorted = false;
-                break;
+                return false;
             }
         }
 
-        return isSorted;
+        return true;
     }
 }

@@ -31,11 +31,11 @@ public class FirstSteps {
     }
 
     public int sum(int[] array){
-        int sum = 0;
-
-        if (array == null) {
-            sum = 0;
+        if (array == null || array.length == 0) {
+            return 0;
         }
+
+        int sum = 0;
 
         for (int i = 0; i <= array.length - 1; i++) { 
             sum += array[i];
@@ -45,11 +45,11 @@ public class FirstSteps {
     }
 
     public int mul(int[] array){
-        int res = 1;
-
-        if (array == null) {
-            res = 0;
+        if (array == null || array.length == 0) {
+            return 0;
         }
+
+        int res = 1;
 
         for (int i = 0; i <= array.length - 1; i++) { 
             res *= array[i];
@@ -59,11 +59,11 @@ public class FirstSteps {
     }
 
     public int min(int[] array){
-        int min = Integer.MAX_VALUE;
-
-        if (array == null) {
-            return min;
+        if (array == null || array.length == 0) {
+            return Integer.MAX_VALUE;
         }
+
+        int min = Integer.MAX_VALUE;
 
         for (int i = 0; i <= array.length - 1; i++) { 
             min = min < array[i] ? min : array[i];
@@ -72,45 +72,40 @@ public class FirstSteps {
         return min;
     }
 
-    public int max(int[] array){
-        int max = Integer.MIN_VALUE;
-        
-        if (array == null) {
-            return max;
+    public int max(int[] array){ 
+        if (array == null || array.length == 0) {
+            return Integer.MIN_VALUE;
         }
 
+        int max = Integer.MIN_VALUE;
+
         for (int i = 0; i <= array.length - 1; i++) { 
-            max = array[i] > max ? max : array[i];
+            max = array[i] > max ? array[i] : max;
         }
 
         return max;
     }
 
     public double average(int[] array){
-        int sum;
-        if (array == null) {
-            sum = 0;
+        if (array == null || array.length == 0) {
+            return 0;
         }
 
-        sum = sum(array);
-        return (double)sum / array.length;
+        return (double)sum(array) / array.length;
     }
 
     public boolean isSortedDescendant(int[] array){
-        boolean isSorted = true;
-
-        if (array == null) { 
-            return isSorted;
+        if (array == null || array.length == 0) {
+            return true;
         }
         
         for (int i = 0; i < array.length - 1; i++) { 
             if (array[i] < array[i + 1]) {
-                isSorted = false;
-                break;
+                return false;
             }
         }
 
-        return isSorted;
+        return true;
     }
 
     public void cube(int[]array){
@@ -140,18 +135,24 @@ public class FirstSteps {
     }
 
     public boolean isPalindrome(int[]array){
-        if (array == null) {
-            return false;
+        if (array == null || array.length == 0) {
+            return true;
         }
 
-        int[] temp = new int[array.length];
-        System.arraycopy(array, 0, temp, 0, array.length);        
-        reverse(temp);
+        for (int i = 0; i <= array.length - 1; i++) { 
+            if (array[i] != array[array.length - 1 - i]) {
+                return false;
+            }
+        }
 
-        return array == temp;
+        return true;
     }
 
     public int sum(int[][] matrix){
+        if (matrix == null || matrix.length == 0) {
+            return 0;
+        }
+
         int sum = 0;
 
         for (int[] i : matrix) {
@@ -162,6 +163,10 @@ public class FirstSteps {
     }
 
     public int max(int[][] matrix){
+        if (matrix == null || matrix.length == 0) {
+            return Integer.MIN_VALUE;
+        }
+
         int max = Integer.MIN_VALUE;
 
         for (int[] i : matrix) {
@@ -172,6 +177,10 @@ public class FirstSteps {
     }
 
     public int diagonalMax(int[][] matrix){
+        if (matrix == null || matrix.length == 0) {
+            return Integer.MIN_VALUE;
+        }
+
         int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < matrix.length; i++) {
@@ -183,10 +192,6 @@ public class FirstSteps {
 
     public boolean isSortedDescendant(int[][] matrix){
         boolean isSorted = true;
-
-        if (matrix == null) { 
-            return isSorted;
-        }
 
         for (int[] i : matrix) {
             if (!isSortedDescendant(i)) {
